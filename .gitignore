@@ -1,33 +1,252 @@
-# Gradle files
-.gradle/
-build/
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي 365 يوم</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        .day-buttons button, .task-buttons button {
+            margin: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .day-buttons button:hover, .task-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .completed {
+            background-color: #28a745 !important;
+        }
+        .not-completed {
+            background-color: #dc3545 !important;
+        }
+        .message {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            animation: fadeOut 4s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/celebration.gif') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .show-celebration {
+            animation: showCelebration 2s forwards;
+        }
+        @keyframes showCelebration {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+            color: white;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+        }
+        th {
+            background-color: #007bff;
+        }
+        td.completed-task {
+            background-color: #28a745;
+        }
+        td.not-completed-task {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">تحدي 365 يوم</div>
+    
+    <!-- قسم اليوم الحالي -->
+    <div class="section" id="current-day">
+        <h2>اليوم الحالي</h2>
+        <p>اليوم: 1</p>
+        <div class="day-buttons">
+            <button onclick="markCompleted()">مكتمل</button>
+            <button onclick="markNotCompleted()" style="background-color: #dc3545;">غير مكتمل</button>
+        </div>
+        <div id="message" class="message">عاش يا وحش، استمر!</div>
+    </div>
+    
+    <!-- قسم متابعة التحدي -->
+    <div class="section">
+        <h2>متابعة التحدي</h2>
+        <div class="day completed">اليوم 1 - مكتمل</div>
+        <div class="day not-completed">اليوم 2 - غير مكتمل</div>
+        <!-- يمكنك إضافة المزيد من الأيام هنا -->
+    </div>
 
-# Local configuration file (sdk path, etc)
-local.properties
+    <!-- قسم الدراسة -->
+    <div class="section">
+        <h2>مهام الدراسة</h2>
+        <table>
+            <tr>
+                <th>المهمة</th>
+                <th>الحالة</th>
+            </tr>
+            <tr>
+                <td>مذاكرة عربي</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>مذاكرة فيزياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>حل فيزياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>مذاكرة كيمياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>حل كيمياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>مذاكرة إنجليزي</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>حل إنجليزي</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>مذاكرة أحياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>حل أحياء</td>
+                <td>
+                    <div class="task-buttons">
+                        <button onclick="taskCompleted(this)">تم</button>
+                        <button onclick="taskNotCompleted(this)" style="background-color: #dc3545;">⁦ಠ⁠︵⁠ಠ⁩</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-# Log/OS Files
-*.log
+    <!-- عنصر الاحتفالات -->
+    <div id="celebration" class="celebration"></div>
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            });
+        }
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+        function markCompleted() {
+            const currentDay = document.getElementById('current-day');
+            currentDay.classList.add('completed');
+            currentDay.classList.remove('not-completed');
+            
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+            
+            showCelebration();
 
-# Keystore files
-*.jks
-*.keystore
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 4000);
+        }
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+        function markNotCompleted() {
+            const currentDay = document.getElementById('current-day');
+            currentDay.classList.add('not-completed');
+            currentDay.classList.remove('completed');
 
-# Android Profiling
-*.hprof
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+
+            setTimeout(() => {
+                message.style.display
